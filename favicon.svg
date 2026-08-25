@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="AttendanceFlow app icon">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#a3e635"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="192" height="192" rx="44" fill="url(#g)"/>
+  <g transform="translate(96 96)">
+    <path d="M -32 -32 L 32 -32 L 32 0 Q 32 32 0 48 Q -32 32 -32 0 Z" fill="#ffffff" opacity="0.9"/>
+    <path d="M -28 -28 L 28 -28 L 28 -2 Q 28 28 0 42 Q -28 28 -28 -2 Z" fill="#ffffff" opacity="0.95"/>
+    <g stroke="#2dd4bf" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M -12 8 L -2 18 L 16 -4"/>
+    </g>
+  </g>
+</svg>

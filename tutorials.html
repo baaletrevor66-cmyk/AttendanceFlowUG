@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorials — AttendanceFlow UG</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="APP-LOGO 16 x 16.ico">
+  <link rel="icon" type="image/x-icon" sizes="32x32" href="APP-LOGO 32 x 32.ico">
+  <link rel="apple-touch-icon" sizes="128x128" href="APP-LOGO 128 x 128.ico">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* Tutorial-specific styles */
+    .tut-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-top: 56px
+    }
+
+    .tut-card {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #fff;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .tut-card:hover {
+      border-color: #c5cfe0;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.07)
+    }
+
+    .tut-role {
+      font-size: 16.6px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .tut-icon {
+      font-size: 53.1px;
+      margin-bottom: 16px
+    }
+
+    .tut-card h3 {
+      font-size: 29.8px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 10px
+    }
+
+    .tut-card p {
+      font-size: 21.4px;
+      color: var(--grey);
+      line-height: 1.7;
+      flex: 1
+    }
+
+    .tut-steps {
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .tut-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start
+    }
+
+    .tut-step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(23, 163, 152, 0.1);
+      color: var(--teal);
+      font-size: 18.3px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .tut-step-title {
+      font-size: 20.7px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px
+    }
+
+    .tut-step-desc {
+      font-size: 19.1px;
+      color: var(--grey);
+      line-height: 1.55
+    }
+
+    /* Wide tutorial card */
+    .tut-card.wide-card {
+      grid-column: span 3
+    }
+
+    .wide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center
+    }
+
+    .wide-steps-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0
+    }
+
+    .wide-step {
+      display: flex;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wide-step:last-child {
+      border-bottom: none
+    }
+
+    .ws-num {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--teal);
+      flex-shrink: 0;
+      width: 28px;
+      padding-top: 2px
+    }
+
+    .ws-title {
+      font-size: 23.3px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px
+    }
+
+    .ws-desc {
+      font-size: 20.7px;
+      color: var(--grey);
+      line-height: 1.6
+    }
+
+    .wide-visual {
+      background: rgba(23, 163, 152, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .wv-label {
+      font-size: 16.6px;
+      font-weight: 700;
+      color: var(--grey2);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 16px
+    }
+
+    .wv-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .wv-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px solid var(--border);
+      font-size: 20px;
+    }
+
+    .wv-name {
+      font-weight: 600;
+      color: var(--ink)
+    }
+
+    .wv-status {
+      font-size: 16.6px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 100px
+    }
+
+    /* FAQ */
+    .faq-list {
+      margin-top: 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      margin-bottom: 6px
+    }
+
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      cursor: pointer;
+      font-size: 23.3px;
+      font-weight: 700;
+      color: var(--ink);
+      transition: color .18s;
+    }
+
+    .faq-q:hover {
+      color: var(--teal)
+    }
+
+    .faq-icon {
+      font-size: 29.8px;
+      color: var(--grey2);
+      transition: transform .25s;
+      flex-shrink: 0
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      font-size: 21.4px;
+      color: var(--grey);
+      line-height: 1.7;
+      padding: 0 24px;
+      transition: max-height .35s ease, padding .35s ease;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 200px;
+      padding: 0 24px 20px
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg)
+    }
+
+    @media(max-width:860px) {
+      .tut-grid {
+        grid-template-columns: 1fr
+      }
+
+      .tut-card.wide-card {
+        grid-column: span 1
+      }
+
+      .wide-grid {
+        grid-template-columns: 1fr
+      }
+
+      .video-grid {
+        grid-template-columns: 1fr
+      }
+
+      .video-card.featured {
+        grid-column: span 1
+      }
+    }
+
+    /* Video Tutorials Section */
+    .video-section {
+      margin-bottom: 80px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 60px
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 40px
+    }
+
+    .video-card {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+    }
+
+    .video-card.featured {
+      grid-column: span 2
+    }
+
+    .video-card:hover {
+      border-color: #c5cfe0;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(10, 12, 16, 0.08)
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--ink);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0
+    }
+
+    .video-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px
+    }
+
+    .video-step-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: rgba(23, 163, 152, 0.08);
+      padding: 4px 10px;
+      border-radius: 6px;
+      width: fit-content;
+    }
+
+    .video-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.35
+    }
+
+    .video-direct-link {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--teal);
+      text-decoration: none;
+      margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color .18s ease;
+    }
+
+    .video-direct-link:hover {
+      color: var(--ink);
+      text-decoration: underline
+    }
+
+    @media(max-width:860px) {
+      .video-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .video-card.featured {
+        grid-column: span 1 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="site-nav">
+      <a href="index.html" class="logo"><img src="APP-LOGO.png" alt="Logo" class="logo-img">AttendanceFlowUG</a>
+      <button class="menu-toggle" type="button" data-page="Tutorials" aria-label="Toggle navigation"
+        aria-expanded="false">
+        <span class="menu-icon"><span></span></span>
+        <span class="menu-label">Tutorials</span>
+      </button>
+      <div class="nav-panel">
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="features.html">Features</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-actions">
+          <a href="https://studio--studio-3981360013-870a8.us-central1.hosted.app/claim-account" class="nav-ghost">Claim
+            access</a>
+          <a href="https://studio--studio-3981360013-870a8.us-central1.hosted.app/" class="nav-pill">Get started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SKY HEADER -->
+  <div class="page-sky-header">
+    <div class="sky-bg"></div>
+    <svg class="sky-clouds" viewBox="0 0 1440 340" preserveAspectRatio="xMidYMin slice"
+      xmlns="http://www.w3.org/2000/svg">
+      <g opacity=".55">
+        <ellipse cx="160" cy="110" rx="150" ry="44" fill="#fff" />
+        <ellipse cx="230" cy="98" rx="76" ry="32" fill="#fff" />
+        <ellipse cx="100" cy="104" rx="66" ry="26" fill="#fff" />
+      </g>
+      <g opacity=".5">
+        <ellipse cx="1300" cy="95" rx="170" ry="48" fill="#fff" />
+        <ellipse cx="1360" cy="83" rx="86" ry="34" fill="#fff" />
+        <ellipse cx="1220" cy="89" rx="76" ry="28" fill="#fff" />
+      </g>
+      <g opacity=".6">
+        <ellipse cx="660" cy="65" rx="120" ry="36" fill="#fff" />
+        <ellipse cx="720" cy="53" rx="66" ry="28" fill="#fff" />
+        <ellipse cx="600" cy="59" rx="60" ry="24" fill="#fff" />
+      </g>
+      <g opacity=".5">
+        <ellipse cx="940" cy="85" rx="130" ry="40" fill="#fff" />
+        <ellipse cx="1000" cy="71" rx="68" ry="30" fill="#fff" />
+      </g>
+      <g opacity=".45">
+        <ellipse cx="400" cy="165" rx="95" ry="28" fill="#fff" />
+        <ellipse cx="460" cy="155" rx="50" ry="22" fill="#fff" />
+      </g>
+      <g opacity=".4">
+        <ellipse cx="1080" cy="150" rx="105" ry="30" fill="#fff" />
+        <ellipse cx="1140" cy="140" rx="56" ry="24" fill="#fff" />
+      </g>
+    </svg>
+    <div class="sky-fade"></div>
+
+    <div class="badge" style="animation:fadeUp .6s ease both">
+      <span class="badge-dot"></span>
+      Step-by-step guides for every role
+    </div>
+    <h1 class="page-title" style="animation:fadeUp .6s .1s ease both">Learn <span>AttendanceFlow</span>.</h1>
+    <p class="page-desc-text" style="animation:fadeUp .6s .18s ease both">
+      Clear, simple guides for admins, teachers, and parents. Get up and running in minutes.
+    </p>
+  </div>
+
+  <!-- TUTORIALS -->
+  <div class="section">
+
+    <!-- VIDEO TUTORIALS -->
+    <div class="video-section">
+      <p class="eyebrow reveal">Video Walkthroughs</p>
+      <h2 class="reveal d1">Watch step-by-step video guides.</h2>
+      <p class="section-body reveal d2">Watch our official video tutorials to learn how to set up and use AttendanceFlow
+        UG in under two minutes.</p>
+
+      <div class="video-grid">
+        <!-- VIDEO 1 -->
+        <div class="video-card featured reveal">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/gH2PwwoXPd8"
+              title="How to create a school account on AttendanceFlowUG"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-step-badge">Tutorial 01</span>
+            <h3 class="video-title">How to create a school account on AttendanceFlowUG</h3>
+            <a href="https://www.youtube.com/watch?v=gH2PwwoXPd8" target="_blank" rel="noopener"
+              class="video-direct-link">Watch on YouTube ↗</a>
+          </div>
+        </div>
+
+        <!-- VIDEO 2 -->
+        <div class="video-card reveal d1">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/Eea9LcIvbJ4"
+              title="How to add teacher to the School directory"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-step-badge">Tutorial 02</span>
+            <h3 class="video-title">How to add teacher to the School directory</h3>
+            <a href="https://www.youtube.com/watch?v=Eea9LcIvbJ4" target="_blank" rel="noopener"
+              class="video-direct-link">Watch on YouTube ↗</a>
+          </div>
+        </div>
+
+        <!-- VIDEO 3 -->
+        <div class="video-card reveal d2">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/cdSD_k2vrm8"
+              title="How to create and assign a class to a teacher"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-step-badge">Tutorial 03</span>
+            <h3 class="video-title">How to create and assign a class to a teacher</h3>
+            <a href="https://www.youtube.com/watch?v=cdSD_k2vrm8" target="_blank" rel="noopener"
+              class="video-direct-link">Watch on YouTube ↗</a>
+          </div>
+        </div>
+
+        <!-- VIDEO 4 -->
+        <div class="video-card reveal d1">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/_Hk43wSwh-g" title="How to claim an Account"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-step-badge">Tutorial 04</span>
+            <h3 class="video-title">How to claim an Account</h3>
+            <a href="https://www.youtube.com/watch?v=_Hk43wSwh-g" target="_blank" rel="noopener"
+              class="video-direct-link">Watch on YouTube ↗</a>
+          </div>
+        </div>
+
+        <!-- VIDEO 5 -->
+        <div class="video-card reveal d2">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube-nocookie.com/embed/fLkBVfbLz84"
+              title="How to mark attendance of a Class in seconds"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-step-badge">Tutorial 05</span>
+            <h3 class="video-title">How to mark attendance of a Class in seconds</h3>
+            <a href="https://www.youtube.com/watch?v=fLkBVfbLz84" target="_blank" rel="noopener"
+              class="video-direct-link">Watch on YouTube ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="eyebrow reveal">By role</p>
+    <h2 class="reveal d1">Pick your guide.</h2>
+    <p class="section-body reveal d2">Each guide is written specifically for that role — no jargon, no fluff. Just what
+      you need to do your job.</p>
+
+    <div class="tut-grid">
+
+      <!-- ADMIN -->
+      <div class="tut-card reveal">
+        <div class="tut-role">For Admins</div>
+        <h3>Setting up your school</h3>
+        <p>From creating your account to approving your first attendance sheet — this guide walks you through the full
+          admin setup.</p>
+        <div class="tut-steps">
+          <div class="tut-step">
+            <div class="tut-step-num">1</div>
+            <div>
+              <div class="tut-step-title">Register your school</div>
+              <div class="tut-step-desc">Sign up at the landing page and enter your school name, district, and contact
+                details.</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">2</div>
+            <div>
+              <div class="tut-step-title">Add staff to the Directory</div>
+              <div class="tut-step-desc">Upload a CSV of teacher and parent emails, or add them one by one. They'll
+                receive a claim link.</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">3</div>
+            <div>
+              <div class="tut-step-title">Create class sections</div>
+              <div class="tut-step-desc">Set up Grade 5A, Grade 6B, etc., and assign an educator to each section.</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">4</div>
+            <div>
+              <div class="tut-step-title">Approve submissions daily</div>
+              <div class="tut-step-desc">When teachers submit, you'll see them in the review queue. One click approves
+                and notifies parents.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEACHER -->
+      <div class="tut-card reveal d1">
+        <div class="tut-role">For Teachers</div>
+        <h3>Taking attendance fast</h3>
+        <p>Your daily workflow takes under two minutes. Open the app, mark your class, submit. Done.</p>
+        <div class="tut-steps">
+          <div class="tut-step">
+            <div class="tut-step-num">1</div>
+            <div>
+              <div class="tut-step-title">Claim your account</div>
+              <div class="tut-step-desc">Visit the Claim page, enter your school email and school name, and set your
+                password.</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">2</div>
+            <div>
+              <div class="tut-step-title">Open your class roster</div>
+              <div class="tut-step-desc">On the Teacher portal, tap your class. All students appear pre-marked as
+                Present.</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">3</div>
+            <div>
+              <div class="tut-step-title">Toggle any exceptions</div>
+              <div class="tut-step-desc">Tap a student's name to cycle them through Present → Late → Absent. One tap
+                each.</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">4</div>
+            <div>
+              <div class="tut-step-title">Submit to admin</div>
+              <div class="tut-step-desc">Hit Submit. It goes straight to the admin queue. You're done for that session.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PARENT -->
+      <div class="tut-card reveal d2">
+        <div class="tut-role">For Parents</div>
+        <h3>Checking your child's record</h3>
+        <p>The Parent portal shows you everything the moment it's approved. No app download required.</p>
+        <div class="tut-steps">
+          <div class="tut-step">
+            <div class="tut-step-num">1</div>
+            <div>
+              <div class="tut-step-title">Claim your account</div>
+              <div class="tut-step-desc">Visit the Claim page, enter your email and your child's school name to unlock
+                access.</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">2</div>
+            <div>
+              <div class="tut-step-title">View today's status</div>
+              <div class="tut-step-desc">The dashboard shows at a glance whether your child was Present, Late, or Absent
+                today.</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">3</div>
+            <div>
+              <div class="tut-step-title">Scroll the full timeline</div>
+              <div class="tut-step-desc">Every session ever recorded for your child is listed chronologically —
+                searchable and exportable.</div>
+            </div>
+          </div>
+          <div class="tut-step">
+            <div class="tut-step-num">4</div>
+            <div>
+              <div class="tut-step-title">Switch between children</div>
+              <div class="tut-step-desc">If you have more than one child at the school, toggle between their profiles at
+                the top of the page.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WIDE: INSTALLING PWA -->
+      <div class="tut-card wide-card reveal">
+        <div class="tut-role">For Everyone</div>
+        <h3>Installing AttendanceFlow as an app</h3>
+        <div class="wide-grid">
+          <div class="wide-steps-col">
+            <div class="wide-step">
+              <div class="ws-num">01</div>
+              <div>
+                <div class="ws-title">Open in your mobile browser</div>
+                <div class="ws-desc">Visit the AttendanceFlow URL in Chrome (Android) or Safari (iOS). No app store
+                  needed.</div>
+              </div>
+            </div>
+            <div class="wide-step">
+              <div class="ws-num">02</div>
+              <div>
+                <div class="ws-title">Tap "Add to Home Screen"</div>
+                <div class="ws-desc">On Android: tap the three-dot menu → Add to Home Screen. On iOS: tap the Share icon
+                  → Add to Home Screen.</div>
+              </div>
+            </div>
+            <div class="wide-step">
+              <div class="ws-num">03</div>
+              <div>
+                <div class="ws-title">Open like any app</div>
+                <div class="ws-desc">The icon appears on your home screen. Tap it to open AttendanceFlow fullscreen — no
+                  browser bar.</div>
+              </div>
+            </div>
+            <div class="wide-step">
+              <div class="ws-num">04</div>
+              <div>
+                <div class="ws-title">Works on 3G, even offline</div>
+                <div class="ws-desc">The PWA caches your roster locally. You can mark attendance even without a signal —
+                  it syncs when you reconnect.</div>
+              </div>
+            </div>
+          </div>
+          <div class="wide-visual">
+            <div class="wv-label">Today's session — Grade 5A</div>
+            <div class="wv-rows">
+              <div class="wv-row"><span class="wv-name">Amara Nakato</span><span class="wv-status mt-p">Present</span>
+              </div>
+              <div class="wv-row"><span class="wv-name">David Ssempa</span><span class="wv-status mt-l">Late</span>
+              </div>
+              <div class="wv-row"><span class="wv-name">Grace Namutebi</span><span class="wv-status mt-p">Present</span>
+              </div>
+              <div class="wv-row"><span class="wv-name">Brian Okello</span><span class="wv-status mt-a">Absent</span>
+              </div>
+              <div class="wv-row"><span class="wv-name">Joan Nansubuga</span><span class="wv-status mt-p">Present</span>
+              </div>
+            </div>
+            <div
+              style="margin-top:16px;padding:12px 14px;border-radius:10px;background:rgba(23,163,152,0.1);font-size:20px;font-weight:700;color:var(--teal);text-align:center">
+              ✓ Submitted · Pending admin approval
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.menu-toggle').forEach((button) => {
+      const label = button.querySelector('.menu-label');
+      const pageName = button.dataset.page || 'Menu';
+      if (label) label.textContent = pageName;
+
+      button.addEventListener('click', () => {
+        const nav = button.closest('.site-nav');
+        const isOpen = nav.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+
+    const mobileScrollTag = document.querySelector('.mobile-scroll-tag');
+    if (mobileScrollTag) {
+      let lastScrollY = window.scrollY;
+
+      const updateTag = () => {
+        const currentY = window.scrollY;
+        const goingDown = currentY > lastScrollY;
+        const distance = Math.min(Math.max((currentY / (document.body.scrollHeight - window.innerHeight)) * 1.4, 0), 1);
+        const opacity = goingDown ? Math.min(distance * 1.5, 1) : Math.max(1 - distance * 1.4, 0);
+        mobileScrollTag.style.opacity = opacity;
+        mobileScrollTag.style.transform = `translateX(-50%) translateY(${goingDown ? 8 : -8}px)`;
+        lastScrollY = currentY;
+      };
+
+      updateTag();
+      window.addEventListener('scroll', updateTag, { passive: true });
+    }
+  </script>
+
+  <div class="mobile-scroll-tag">AttendanceFlowUG — Simplify school attendance</div>
+
+  <!-- FAQ -->
+  <div class="section">
+    <p class="eyebrow reveal">Common questions</p>
+    <h2 class="reveal d1">FAQ</h2>
+    <div class="faq-list reveal d2">
+      <div class="faq-item">
+        <div class="faq-q"><span>What happens if a teacher submits the wrong attendance?</span><span
+            class="faq-icon">+</span></div>
+        <div class="faq-a">The admin can reject the submission from the review queue. The teacher will then be able to
+          re-submit a corrected record. All versions are logged in the audit trail.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Does the app work without internet?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes. The PWA caches your class roster locally. Teachers can mark attendance offline and the
+          record will sync automatically once a connection is available.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Can a parent see another school's data?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Never. Institutional sharding ensures that every user — including admins — only ever sees
+          data belonging to their specific school. This is enforced at the database level, not just by UI filters.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>How long do invite links last?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Permanently. Unlike many systems that use expiring invite tokens, AttendanceFlow's claim
+          links are valid indefinitely. Staff can claim their account whenever is convenient for them.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>How do I add a student mid-term?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Admins can add students to the directory and enroll them in a class at any time. Teachers can
+          also add students directly to their roster from the Teacher portal during or before a session.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap reveal">
+    <div class="cta-box">
+      <h2>Ready to try it yourself?</h2>
+      <p>Book a live guided walkthrough with the AttendanceFlow team in Kampala. We'll set up your school together.</p>
+      <div class="cta-btns">
+        <a href="contact.html" class="cta-btn-p">Book a walkthrough →</a>
+        <a href="features.html" class="cta-btn-g">Back to features</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-f"><img src="APP-LOGO.png" alt="Logo" class="logo-img">AttendanceFlowUG</div>
+        <p>A security-first digital registry for Ugandan schools.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="https://x.com/AttendanceFlow" target="_blank" rel="noopener"><img src="X.png" alt="X"
+              class="footer-icon">
+            @AttendanceFlowUG</a>
+          <a href="https://wa.me/256747511398" target="_blank" rel="noopener"><img src="whatsapp business.jpg"
+              alt="WhatsApp Business" class="footer-icon"> WhatsApp Business</a>
+          <a href="https://www.facebook.com/profile.php?id=61588762336919" target="_blank" rel="noopener"><img
+              src="Facebook.jpg" alt="Facebook" class="footer-icon"> AttendanceFlowUG</a>
+          <a href="mailto:attendanceflowug@gmail.com"><img src="Gmail(1).png" alt="Email" class="footer-icon">
+            attendanceflowug@gmail.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 AttendanceFlow UG. Built in Uganda.</div>
+      <div class="footer-copy footer-copy-tagline">Simplify. Track. Connect. The pulse of your school in your pocket.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const els = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(e => e.forEach(el => { if (el.isIntersecting) el.target.classList.add('in'); }), { threshold: 0.1 });
+    els.forEach(el => obs.observe(el));
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+</body>
+
+</html>

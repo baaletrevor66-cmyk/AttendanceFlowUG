@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — AttendanceFlow UG</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/x-icon" sizes="16x16" href="APP-LOGO 16 x 16.ico">
+  <link rel="icon" type="image/x-icon" sizes="32x32" href="APP-LOGO 32 x 32.ico">
+  <link rel="apple-touch-icon" sizes="128x128" href="APP-LOGO 128 x 128.ico">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* Contact-specific */
+    .contact-grid {
+      display: block;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .contact-card {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #fff;
+      padding: 36px 32px;
+    }
+
+    .contact-card h3 {
+      font-size: 31.6px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 10px
+    }
+
+    .contact-card p {
+      font-size: 22.4px;
+      color: var(--grey);
+      line-height: 1.7;
+      margin-bottom: 24px
+    }
+
+    /* Form */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px
+    }
+
+    .form-label {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.01em
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: 22.4px;
+      color: var(--ink);
+      padding: 11px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+      outline: none;
+      transition: border-color .18s, box-shadow .18s;
+      width: 100%;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(23, 163, 152, 0.1);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.6
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px
+    }
+
+    .form-submit {
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 23.3px;
+      font-weight: 700;
+      color: #fff;
+      padding: 13px;
+      border-radius: 10px;
+      background: var(--ink);
+      border: none;
+      cursor: pointer;
+      transition: all .2s;
+      margin-top: 4px;
+      letter-spacing: -0.01em;
+    }
+
+    .form-submit:hover {
+      background: var(--ink2);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(10, 12, 16, 0.18)
+    }
+
+    /* Contact info cards */
+    .info-stack {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .info-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+      padding: 22px 18px 18px;
+      min-height: 210px;
+      height: 100%;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .info-card:hover {
+      border-color: #c5cfe0;
+      transform: translateY(-2px)
+    }
+
+    .info-icon {
+      font-size: 36.5px;
+      flex-shrink: 0
+    }
+
+    .info-title {
+      font-size: clamp(18px, 1.7vw, 22px);
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 3px;
+      line-height: 1.2;
+    }
+
+    .info-val {
+      font-size: clamp(17px, 1.45vw, 20px);
+      color: var(--grey);
+      line-height: 1.55;
+      text-decoration: none;
+      display: block;
+      word-break: break-word;
+    }
+
+    .info-val:hover {
+      color: var(--teal)
+    }
+
+    /* Smooth Rounded Modern Icons */
+    .info-icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(10, 12, 16, 0.08);
+      border: 1px solid var(--border);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .smooth-icon {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .smooth-icon-contain {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 4px;
+      display: block;
+    }
+
+    .info-card:hover .info-icon-box {
+      transform: translateY(-1px) scale(1.05);
+      border-color: var(--teal);
+      box-shadow: 0 4px 14px rgba(23, 163, 152, 0.18);
+    }
+
+    .footer-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      object-fit: cover;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    .footer-col a,
+    .footer-soc a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Role selector cards */
+    .role-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 24px
+    }
+
+    .role-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .18s, background .18s;
+    }
+
+    .role-card:hover,
+    .role-card.selected {
+      border-color: var(--teal);
+      background: rgba(23, 163, 152, 0.05);
+    }
+
+    .role-card-icon {
+      font-size: 36.5px;
+      margin-bottom: 6px
+    }
+
+    .role-card-label {
+      font-size: 19.1px;
+      font-weight: 700;
+      color: var(--ink)
+    }
+
+    /* Claim section */
+    .claim-box {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: #fff;
+      padding: 36px 32px;
+    }
+
+    .claim-box h3 {
+      font-size: 31.6px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 10px
+    }
+
+    .claim-box p {
+      font-size: 22.4px;
+      color: var(--grey);
+      line-height: 1.7;
+      margin-bottom: 24px
+    }
+
+    .claim-steps-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .claim-step {
+      background: rgba(23, 163, 152, 0.04);
+      border: 1px solid rgba(23, 163, 152, 0.15);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .cs-num {
+      font-size: 18.3px;
+      font-weight: 800;
+      color: var(--teal);
+      letter-spacing: 0.07em;
+      margin-bottom: 6px
+    }
+
+    .cs-title {
+      font-size: 21.4px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 3px
+    }
+
+    .cs-desc {
+      font-size: 19.1px;
+      color: var(--grey);
+      line-height: 1.5
+    }
+
+    @media(max-width:860px) {
+      .contact-grid {
+        grid-template-columns: 1fr
+      }
+
+      .info-stack {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .info-card {
+        min-height: 170px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr
+      }
+
+      .role-cards {
+        grid-template-columns: 1fr 1fr 1fr
+      }
+
+      .claim-steps-row {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="site-nav">
+      <a href="index.html" class="logo"><img src="APP-LOGO.png" alt="Logo" class="logo-img">AttendanceFlowUG</a>
+      <button class="menu-toggle" type="button" data-page="Contact" aria-label="Toggle navigation"
+        aria-expanded="false">
+        <span class="menu-icon"><span></span></span>
+        <span class="menu-label">Contact</span>
+      </button>
+      <div class="nav-panel">
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="features.html">Features</a>
+          <a href="tutorials.html">Tutorials</a>
+        </div>
+        <div class="nav-actions">
+          <a href="https://studio--studio-3981360013-870a8.us-central1.hosted.app/claim-account" class="nav-ghost">Claim
+            access</a>
+          <a href="https://studio--studio-3981360013-870a8.us-central1.hosted.app/" class="nav-pill">Get started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SKY HEADER -->
+  <div class="page-sky-header">
+    <div class="sky-bg"></div>
+    <svg class="sky-clouds" viewBox="0 0 1440 340" preserveAspectRatio="xMidYMin slice"
+      xmlns="http://www.w3.org/2000/svg">
+      <g opacity=".55">
+        <ellipse cx="170" cy="115" rx="155" ry="45" fill="#fff" />
+        <ellipse cx="240" cy="103" rx="78" ry="33" fill="#fff" />
+        <ellipse cx="110" cy="109" rx="68" ry="27" fill="#fff" />
+      </g>
+      <g opacity=".5">
+        <ellipse cx="1290" cy="98" rx="175" ry="49" fill="#fff" />
+        <ellipse cx="1350" cy="86" rx="88" ry="35" fill="#fff" />
+        <ellipse cx="1210" cy="92" rx="78" ry="29" fill="#fff" />
+      </g>
+      <g opacity=".65">
+        <ellipse cx="650" cy="68" rx="125" ry="37" fill="#fff" />
+        <ellipse cx="710" cy="56" rx="68" ry="29" fill="#fff" />
+        <ellipse cx="590" cy="62" rx="62" ry="25" fill="#fff" />
+      </g>
+      <g opacity=".55">
+        <ellipse cx="930" cy="88" rx="135" ry="41" fill="#fff" />
+        <ellipse cx="990" cy="74" rx="70" ry="31" fill="#fff" />
+      </g>
+      <g opacity=".45">
+        <ellipse cx="410" cy="168" rx="92" ry="27" fill="#fff" />
+        <ellipse cx="470" cy="158" rx="48" ry="21" fill="#fff" />
+      </g>
+      <g opacity=".4">
+        <ellipse cx="1070" cy="152" rx="102" ry="29" fill="#fff" />
+        <ellipse cx="1130" cy="142" rx="54" ry="23" fill="#fff" />
+      </g>
+    </svg>
+    <div class="sky-fade"></div>
+
+    <div class="badge" style="animation:fadeUp .6s ease both">
+      <span class="badge-dot"></span>
+      Kampala, Uganda
+    </div>
+    <h1 class="page-title" style="animation:fadeUp .6s .1s ease both">Let's <span>talk</span>.</h1>
+    <p class="page-desc-text" style="animation:fadeUp .6s .18s ease both">
+      Book a demo, claim your access, or just ask a question. We're based in Kampala and respond fast.
+    </p>
+  </div>
+
+  <!-- CONTACT GRID -->
+  <div id="form" class="section">
+    <div class="contact-grid">
+
+      <!-- INFO -->
+      <div class="info-stack reveal d1">
+        <div class="info-card">
+          <div class="info-icon-box">
+            <img src="Gmail(1).png" alt="Email" class="smooth-icon-contain">
+          </div>
+          <div>
+            <div class="info-title">Email us directly</div>
+            <a class="info-val" href="mailto:attendanceflowug@gmail.com">attendanceflowug@gmail.com</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon-box">
+            <img src="X.png" alt="X / Twitter" class="smooth-icon">
+          </div>
+          <div>
+            <div class="info-title">X / Twitter</div>
+            <a class="info-val" href="https://x.com/AttendanceFlow" target="_blank" rel="noopener">@AttendanceFlowUG</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon-box">
+            <img src="whatsapp.jpg" alt="WhatsApp" class="smooth-icon">
+          </div>
+          <div>
+            <div class="info-title">WhatsApp</div>
+            <a class="info-val" href="https://wa.me/256769131757" target="_blank" rel="noopener">+256 769 131757 (Quick
+              Chat)</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon-box">
+            <img src="whatsapp business.jpg" alt="WhatsApp Business" class="smooth-icon">
+          </div>
+          <div>
+            <div class="info-title">WhatsApp Business</div>
+            <a class="info-val" href="https://wa.me/256747511398" target="_blank" rel="noopener">+256 747 511398</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon-box">
+            <img src="Facebook.jpg" alt="Facebook" class="smooth-icon">
+          </div>
+          <div>
+            <div class="info-title">Facebook</div>
+            <a class="info-val" href="https://www.facebook.com/profile.php?id=61588762336919" target="_blank"
+              rel="noopener">AttendanceFlow UG</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon-box">
+            <img src="Instagram.jpg" alt="Instagram" class="smooth-icon">
+          </div>
+          <div>
+            <div class="info-title">Instagram</div>
+            <a class="info-val" href="https://www.instagram.com/attendanceflowug/" target="_blank"
+              rel="noopener">@AttendanceFlowUG</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon-box">
+            <img src="Youtube.png" alt="YouTube" class="smooth-icon">
+          </div>
+          <div>
+            <div class="info-title">YouTube</div>
+            <a class="info-val" href="https://www.youtube.com/@AttendanceFlowUG" target="_blank"
+              rel="noopener">@AttendanceFlowUG</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon-box" style="font-size:24px;">⏱️</div>
+          <div>
+            <div class="info-title">Response time</div>
+            <span class="info-val">Within one business day. Usually same day.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLAIM ACCESS -->
+  <div id="claim" class="section" style="padding-top:0">
+    <p class="eyebrow reveal">For teachers & parents</p>
+    <h2 class="reveal d1">Claim your access.</h2>
+    <p class="section-body reveal d2">No app store. No expiring link. Your admin has already added you — just unlock
+      your account.</p>
+
+    <div class="claim-box reveal" style="margin-top:40px">
+      <h3>How claiming works</h3>
+      <p>Your school admin added your email to the system. Follow these three steps to activate your account.</p>
+      <div class="claim-steps-row">
+        <div class="claim-step">
+          <div class="cs-num">STEP 01</div>
+          <div class="cs-title">Go to the Claim page</div>
+          <div class="cs-desc">Visit attendanceflow.ug/claim in any browser on your phone or computer.</div>
+        </div>
+        <div class="claim-step">
+          <div class="cs-num">STEP 02</div>
+          <div class="cs-title">Enter your details</div>
+          <div class="cs-desc">Type the email your admin registered and your school's name to find your profile.</div>
+        </div>
+        <div class="claim-step">
+          <div class="cs-num">STEP 03</div>
+          <div class="cs-title">Set your password</div>
+          <div class="cs-desc">Choose a password and you're in. Your account is active immediately.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="https://studio--studio-3981360013-870a8.us-central1.hosted.app/claim-account" class="btn-dark">Go to
+          Claim page →</a>
+        <a href="tutorials.html" class="btn-light">Watch the tutorial</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap reveal">
+    <div class="cta-box">
+      <h2>Deploy at your school today.</h2>
+      <p>Join Ugandan schools building transparent, fraud-resistant attendance systems.</p>
+      <div class="cta-btns">
+        <a href="mailto:attendanceflowug@gmail.com" class="cta-btn-p">Email us →</a>
+        <a href="https://studio--studio-3981360013-870a8.us-central1.hosted.app/" class="cta-btn-g">Get Started</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-f"><img src="APP-LOGO.png" alt="Logo" class="logo-img">AttendanceFlowUG</div>
+        <p>A security-first digital registry for Ugandan schools.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="https://x.com" target="_blank" rel="noopener"><img src="X.png" alt="X" class="footer-icon">
+            @AttendanceFlowUG</a>
+          <a href="https://wa.me/256747511398" target="_blank" rel="noopener"><img src="whatsapp business.jpg"
+              alt="WhatsApp Business" class="footer-icon"> WhatsApp Business</a>
+          <a href="https://facebook.com" target="_blank" rel="noopener"><img src="Facebook.jpg" alt="Facebook"
+              class="footer-icon"> AttendanceFlowUG</a>
+          <a href="mailto:attendanceflowug@gmail.com"><img src="Gmail(1).png" alt="Email" class="footer-icon">
+            attendanceflowug@gmail.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 AttendanceFlow UG. Built in Uganda.</div>
+      <div class="footer-copy footer-copy-tagline">Simplify. Track. Connect. The pulse of your school in your pocket.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const els = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(e => e.forEach(el => { if (el.isIntersecting) el.target.classList.add('in'); }), { threshold: 0.1 });
+    els.forEach(el => obs.observe(el));
+
+    function selectRole(el) {
+      document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    document.querySelectorAll('.menu-toggle').forEach((button) => {
+      const label = button.querySelector('.menu-label');
+      const pageName = button.dataset.page || 'Menu';
+      if (label) label.textContent = pageName;
+
+      button.addEventListener('click', () => {
+        const nav = button.closest('.site-nav');
+        const isOpen = nav.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+
+    document.querySelectorAll('.nav-links a, .nav-actions a').forEach((link) => {
+      link.addEventListener('click', () => {
+        const nav = link.closest('.site-nav');
+        if (nav) {
+          nav.classList.remove('open');
+          const toggle = nav.querySelector('.menu-toggle');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    const mobileScrollTag = document.querySelector('.mobile-scroll-tag');
+    if (mobileScrollTag) {
+      let lastScrollY = window.scrollY;
+
+      const updateTag = () => {
+        const currentY = window.scrollY;
+        const goingDown = currentY > lastScrollY;
+        const distance = Math.min(Math.max((currentY / (document.body.scrollHeight - window.innerHeight)) * 1.4, 0), 1);
+        const opacity = goingDown ? Math.min(distance * 1.5, 1) : Math.max(1 - distance * 1.4, 0);
+        mobileScrollTag.style.opacity = opacity;
+        mobileScrollTag.style.transform = `translateX(-50%) translateY(${goingDown ? 8 : -8}px)`;
+        lastScrollY = currentY;
+      };
+
+      updateTag();
+      window.addEventListener('scroll', updateTag, { passive: true });
+    }
+  </script>
+  <div class="mobile-scroll-tag">AttendanceFlowUG — Simplify school attendance</div>
+</body>
+
+</html>
